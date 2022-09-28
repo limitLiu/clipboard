@@ -15,10 +15,12 @@ class Clipboard {
   private init() {}
   
   public func start() {
-    timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { t in
-      if self.changeCount != self.pasteboard.changeCount {
-        self.changeCount = self.pasteboard.changeCount
-        NotificationCenter.default.post(name: .PasteboardDidChange, object: self.pasteboard)
+    timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) {[weak self] t in
+      if let this = self {
+        if this.changeCount != this.pasteboard.changeCount {
+          this.changeCount = this.pasteboard.changeCount
+          NotificationCenter.default.post(name: .PasteboardDidChange, object: this.pasteboard)
+        }
       }
     }
   }

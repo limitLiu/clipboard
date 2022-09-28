@@ -25,8 +25,6 @@ class ViewController: NSViewController {
     willSetup.rowSizeStyle = .custom
     willSetup.addTableColumn(column)
     willSetup.autoresizesSubviews = true
-    willSetup.usesAutomaticRowHeights = true
-//    willSetup.selectionHighlightStyle = .regular
     return willSetup
   }()
   
@@ -71,6 +69,9 @@ class ViewController: NSViewController {
     }
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
 }
 
 extension ViewController {
